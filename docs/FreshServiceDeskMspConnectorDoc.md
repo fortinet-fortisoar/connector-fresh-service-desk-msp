@@ -4,14 +4,21 @@ Fresh Service Desk MSP is a cloud-based service desk and IT service management (
 
 ### Version information
 
-Connector Version: 1.0.0
-
+Connector Version: 1.1.0
 
 Authored By: spryIQ.co
 
 Contributors: Jitesh Rathod
 
 Certified: No
+
+## Release Notes for version 1.1.0
+Following enhancements have been made to the Fresh Service Desk MSP Connector in version 1.1.0:
+<ul>
+<li><p>Fixed issue with the <code>Filter Tickets By Query</code> operation.</p></li>
+<li><p>Added a new action: <code>Execute an API Request</code></p></li>
+</ul>
+
 ## Installing the connector
 <p>From FortiSOAR&trade; 5.0.0 onwards, use the <strong>Connector Store</strong> to install the connector. For the detailed procedure to install a connector, click <a href="https://docs.fortinet.com/document/fortisoar/0.0.0/installing-a-connector/1/installing-a-connector" target="_top">here</a>.<br>You can also use the following <code>yum</code> command as a root user to install connectors from an SSH session:</p>
 `yum install cyops-connector-fresh-service-desk-msp`
@@ -28,26 +35,27 @@ For the procedure to configure a connector, click [here](https://docs.fortinet.c
 ### Configuration parameters
 <p>In FortiSOAR&trade;, on the Connectors page, click the <strong>Fresh Service Desk MSP</strong> connector row (if you are in the <strong>Grid</strong> view on the Connectors page) and in the <strong>Configurations&nbsp;</strong> tab enter the required configuration details:&nbsp;</p>
 <table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Server URL<br></td><td>Specify the URL of the Fresh Service Desk MSP server to which you will connect and perform the automated operations.<br>
-<tr><td>Api Key<br></td><td>Specify the api key  that is configured for your account to access the Fresh Service Desk MSP endpoint.<br>
+<tr><td>API Key<br></td><td>Specify the api key that is configured for your account to access the Fresh Service Desk MSP endpoint.<br>
 <tr><td>Verify SSL<br></td><td>Specifies whether the SSL certificate for the server is to be verified or not. <br/>By default, this option is set as True.<br></td></tr>
 </tbody></table>
 
 ## Actions supported by the connector
 The following automated operations can be included in playbooks and you can also use the annotations to access operations from FortiSOAR&trade; release 4.10.0 and onwards:
 <table border=1><thead><tr><th>Function<br></th><th>Description<br></th><th>Annotation and Category<br></th></tr></thead><tbody><tr><td>Create Ticket<br></td><td>Creates a ticket in Fresh Service Desk MSP based on the requester, subject, and other input parameters you have specified.<br></td><td>create_ticket <br/>Investigation<br></td></tr>
-<tr><td>Get Ticket By ID<br></td><td>Retrieves details of specific tickets from  Fresh Service Desk MSP on the input parameters you have specified.<br></td><td>get_ticket_by_id <br/>Investigation<br></td></tr>
-<tr><td>Delete Ticket By ID<br></td><td>Delete of specific tickets from  Fresh Service Desk MSP on the input parameters you have specified.<br></td><td>delete_ticket_by_id <br/>Investigation<br></td></tr>
+<tr><td>Get Ticket By ID<br></td><td>Retrieves details of specific tickets from Fresh Service Desk MSP on the input parameters you have specified.<br></td><td>get_ticket_by_id <br/>Investigation<br></td></tr>
+<tr><td>Delete Ticket By ID<br></td><td>Delete of specific tickets from Fresh Service Desk MSP on the input parameters you have specified.<br></td><td>delete_ticket_by_id <br/>Investigation<br></td></tr>
 <tr><td>Update Ticket<br></td><td>Update a ticket in Fresh Service Desk MSP based on the ticket id and other input parameters you have specified.<br></td><td>update_ticket <br/>Investigation<br></td></tr>
 <tr><td>Filter Tickets By Query<br></td><td>Retrieves list of tickets matching the specified query.<br></td><td>filter_tickets_by_query <br/>Investigation<br></td></tr>
+<tr><td>Execute an API Request<br></td><td>Sends an API request to an API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs.<br></td><td>execute_an_api_call <br/>Investigation<br></td></tr>
 </tbody></table>
 
 ### operation: Create Ticket
 #### Input parameters
 <table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Subject<br></td><td>Specify the subject of the ticket request that you want to create in Fresh Service Desk MSP.<br>
-</td></tr><tr><td>Email<br></td><td>Specify email address  of the requester. If no contact exists with this email address in Fresh Service Desk MSP, it will be added as a new contact.<br>
-</td></tr><tr><td>CC Email<br></td><td>Specify email address  of the requester. If no contact exists with this email address in Fresh Service Desk MSP, it will be added as a new contact.<br>
-</td></tr><tr><td>Status<br></td><td>Select the status of the ticket request to create in Fresh Service Desk MSP.<br>
-</td></tr><tr><td>Priorities<br></td><td>Select the priority of the ticket request to create in Fresh Service Desk MSP.<br>
+</td></tr><tr><td>Email<br></td><td>Specify email address of the requester. If no contact exists with this email address in Fresh Service Desk MSP, it will be added as a new contact.<br>
+</td></tr><tr><td>CC Email<br></td><td>Specify email address of the requester. If no contact exists with this email address in Fresh Service Desk MSP, it will be added as a new contact.<br>
+</td></tr><tr><td>Status<br></td><td>Select the status of the ticket request to create in Fresh Service Desk MSP. You can choose from the following options: Open, Pending, Resolved, or Closed.<br>
+</td></tr><tr><td>Priorities<br></td><td>Select the priority of the ticket request to create in Fresh Service Desk MSP. You can choose from the following options: Low, Medium, High, or Urgent.<br>
 </td></tr><tr><td>Description<br></td><td>Specify the description of the ticket request to create in Fresh Service Desk MSP.<br>
 </td></tr></tbody></table>
 
@@ -93,10 +101,9 @@ The output contains the following populated JSON schema:
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        "resolution_notes_html": ""
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;    }
 </code><code><br>}</code>
-
 ### operation: Get Ticket By ID
 #### Input parameters
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Ticket ID<br></td><td>Specify id  of the ticket for which you want to retrieve ticket details from Fresh Service Desk MSP.<br>
+<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Ticket ID<br></td><td>Specify ID of the ticket for which you want to retrieve ticket details from Fresh Service Desk MSP.<br>
 </td></tr></tbody></table>
 
 #### Output
@@ -141,10 +148,9 @@ The output contains the following populated JSON schema:
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        "resolution_notes_html": ""
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;    }
 </code><code><br>}</code>
-
 ### operation: Delete Ticket By ID
 #### Input parameters
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Ticket ID<br></td><td>Specify id  of the ticket for which you want to retrieve ticket details from Fresh Service Desk MSP.<br>
+<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Ticket ID<br></td><td>Specify ID of the ticket for which you want to delete specific ticket details from Fresh Service Desk MSP.<br>
 </td></tr></tbody></table>
 
 #### Output
@@ -189,15 +195,14 @@ The output contains the following populated JSON schema:
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        "resolution_notes_html": ""
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;    }
 </code><code><br>}</code>
-
 ### operation: Update Ticket
 #### Input parameters
-<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Ticket ID<br></td><td>Specify id of the ticket for which you want to retrieve ticket details from Fresh Service Desk MSP.<br>
+<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Ticket ID<br></td><td>Specify ID of the ticket for which you want to update ticket details in Fresh Service Desk MSP.<br>
 </td></tr><tr><td>Subject<br></td><td>Specify the subject of the ticket request that you want to update in Fresh Service Desk MSP.<br>
 </td></tr><tr><td>Description<br></td><td>Specify the description of the ticket request that you want to update in Fresh Service Desk MSP.<br>
 </td></tr><tr><td>Email<br></td><td>Specify email address  of the requester. If no contact exists with this email address in Fresh Service Desk MSP, it will be added as a new contact.<br>
-</td></tr><tr><td>Status<br></td><td>Select the status of the ticket request for which you want to create tickets from Fresh Service Desk MSP.<br>
-</td></tr><tr><td>Priorities<br></td><td>Select the priority of the ticket request for which you want to retrieve tickets from from Fresh Service Desk MSP.<br>
+</td></tr><tr><td>Status<br></td><td>Select the status of the ticket request for which you want to create tickets from Fresh Service Desk MSP. You can choose from the following options: Open, Pending, Resolved, or Closed.<br>
+</td></tr><tr><td>Priorities<br></td><td>Select the priority of the ticket request for which you want to retrieve tickets from from Fresh Service Desk MSP. You can choose from the following options: Low, Medium, High, or Urgent.<br>
 </td></tr><tr><td>File IRI or Attachment IRI<br></td><td>Specify the file to add as an attachment to the specified a ticket. You can select from the following options: Attachment ID: Specify the attachment ID of the file in the FortiSOAR Attachments module. File IRI: Specify the File IRI of the file in the FortiSOAR Attachments module.<br>
 <strong>If you choose 'Attachment ID'</strong><ul><li>Attachment ID: Specify the attachment ID of the file in the FortiSOAR Attachments module.</li></ul><strong>If you choose 'File IRI'</strong><ul><li>File IRI: Specify the File IRI of the file in the FortiSOAR Attachments module.</li></ul></td></tr></tbody></table>
 
@@ -243,7 +248,6 @@ The output contains the following populated JSON schema:
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        "resolution_notes_html": ""
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;    }
 </code><code><br>}</code>
-
 ### operation: Filter Tickets By Query
 #### Input parameters
 <table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>Query<br></td><td>Specify query to filter ticket request for which you want to retrieve list of tickets from Fresh Service Desk MSP.<br>
@@ -291,13 +295,35 @@ The output contains the following populated JSON schema:
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        "resolution_notes_html": ""
 </code><code><br>&nbsp;&nbsp;&nbsp;&nbsp;    }
 </code><code><br>}</code>
+### operation: Execute an API Request
+#### Input parameters
+<table border=1><thead><tr><th>Parameter<br></th><th>Description<br></th></tr></thead><tbody><tr><td>HTTP Method<br></td><td>Select an HTTP action for the request. You can select from the following options:  
+
+DELETE 
+
+GET 
+
+PATCH 
+
+POST 
+
+PUT <br>
+</td></tr><tr><td>Endpoint<br></td><td>Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/images/pic.jpg, the endpoint would be /images/pic.jpg.<br>
+</td></tr><tr><td>Query Parameters<br></td><td>(Optional) Specify any optional parameters to add to the URL and refine the request.<br>
+</td></tr><tr><td>Request Payload<br></td><td>(Optional) Specify data, as JSON, to be sent as the request payload (typically for POST or PUT requests).<br>
+</td></tr></tbody></table>
+
+#### Output
+
+ The output contains a non-dictionary value.
 ## Included playbooks
-The `Sample - fresh-service-desk-msp - 1.0.0` playbook collection comes bundled with the Fresh Service Desk MSP connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** > **Playbooks** section in FortiSOAR<sup>TM</sup> after importing the Fresh Service Desk MSP connector.
+The `Sample - Fresh Service Desk MSP - 1.1.0` playbook collection comes bundled with the Fresh Service Desk MSP connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** > **Playbooks** section in FortiSOAR<sup>TM</sup> after importing the Fresh Service Desk MSP connector.
 
 - Create Ticket
 - Delete Ticket By ID
 - Filter Tickets By Query
 - Get Ticket By ID
 - Update Ticket
+- Execute an API Request
 
 **Note**: If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.
