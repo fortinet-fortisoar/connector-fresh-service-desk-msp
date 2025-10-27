@@ -231,9 +231,9 @@ def filter_tickets_by_query(config, params, **kwargs):
     try:
         obj = FreshService(config)
         query = params.get('query', '')
-        encoded_query = urllib.parse.quote(query)
-        endpoint = f'/api/v2/search/tickets?query="{encoded_query}"'
-        response = obj.make_api_call(method='GET', endpoint=endpoint)
+        endpoint = f'/api/v2/search/tickets?query="{query}"'
+        response = obj.make_api_call(method='GET',
+                                     endpoint=endpoint)
         return response
     except Exception as e:
         logger.exception('{0}'.format(e))
